@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Sopa de Letras del Amor</title>
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #ffd6e0, #ffeaf6);
+      text-align: center;
+      padding: 30px;
+    }
+    h2 {
+      font-family: 'Great Vibes', cursive;
+      font-size: 48px;
+      color: #d6336c;
+    }
+    .sopa {
+      display: grid;
+      grid-template-columns: repeat(12, 40px);
+      gap: 5px;
+      justify-content: center;
+      margin: 30px auto;
+    }
+    .letra {
+      width: 40px;
+      height: 40px;
+      background: white;
+      border: 2px solid #d6336c;
+      font-weight: bold;
+      font-size: 20px;
+      color: #d6336c;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .selected {
+      background: #f78fb3;
+      color: white;
+    }
+    .found {
+      background: #70c1b3;
+      color: white;
+    }
+    .palabras {
+      margin-top: 20px;
+      font-size: 18px;
+      text-align: left;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .palabras ol {
+      padding-left: 20px;
+    }
+    .mensaje {
+      font-family: 'Great Vibes', cursive;
+      font-size: 36px;
+      color: #d6336c;
+      margin-top: 30px;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<h2>Sopa de Letras del Amor</h2>
+<div class="sopa" id="sopa"></div>
+<div class="palabras">
+  <strong>Responde encontrando en la sopa:</strong>
+  <ol>
+    <li>¿Cuántos años cumples? (die.......)</li>
+    <li>¿Cuál fue nuestro primer apodo? (con.....)</li>
+    <li>¿Qué te gusta comer actualmente? (pi...)</li>
+    <li>¿Tu fruta favorita? (u...)</li>
+    <li>¿Qué palabra formamos tú y yo? (tur.......)</li>
+    <li>¿Cómo te gusta que te diga turri? (mia...)</li>
+  </ol>
+</div>
+<div class="mensaje" id="mensaje">🎉 Felicidades. Te amo mucho 💖</div>
+
+<script>
+  const palabras = ["diecinueve", "conejita", "pizza", "uvas", "turrisharo", "miamor"];
+  let encontrados = [];
+  const letras = [
+    "a", "d", "i", "e", "c", "i", "n", "u", "e", "v", "e", "b",
+    "r", "t", "y", "u", "q", "m", "z", "l", "n", "x", "w", "o",
+    "c", "o", "n", "e", "j", "i", "t", "a", "m", "b", "a", "l",
+    "y", "g", "h", "p", "i", "z", "z", "a", "f", "s", "c", "v",
+    "k", "m", "i", "a", "m", "o", "r", "n", "d", "j", "q", "e",
+    "b", "v", "h", "u", "v", "a", "s", "t", "g", "i", "o", "w",
+    "t", "u", "r", "r", "i", "s", "h", "a", "r", "o", "l", "k",
+    "e", "u", "y", "q", "b", "n", "z", "m", "p", "s", "r", "x"
+  ];
+
+  const grid = document.getElementById('sopa');
+  letras.forEach((letra, i) => {
+    const div = document.createElement('div');
+    div.classList.add('letra');
+    div.textContent = letra.toUpperCase();
+    div.dataset.index = i;
+    grid.appendChild(div);
+  });
+
+  let seleccion = [];
+
+  grid.addEventListener('click', e => {
+    if (!e.target.classList.contains('letra')) return;
+    const index = e.target.dataset.index;
+    if (e.target.classList.contains('selected')) {
+      e.target.classList.remove('selected');
+      seleccion = seleccion.filter(i => i !== index);
+    } else {
+      e.target.classList.add('selected');
+      seleccion.push(index);
+    }
+
+    if (seleccion.length >= 2) {
+      const palabra = seleccion.map(i => letras[i]).join('').toLowerCase();
+      if (palabras.includes(palabra) && !encontrados.includes(palabra)) {
+        seleccion.forEach(i => {
+          grid.children[i].classList.remove('selected');
+          grid.children[i].classList.add('found');
+        });
+        encontrados.push(palabra);
+        seleccion = [];
+
+        if (encontrados.length === palabras.length) {
+          const mensaje = document.getElementById('mensaje');
+          mensaje.style.display = 'block';
+          mensaje.textContent = '🎉 Felicidades. Te amo mucho 💖';
+          setTimeout(() => {
+            window.location.href = 'carta.php';
+          }, 5000);
+        }
+      }
+    }
+  });
+</script>
+</body>
+</html>
