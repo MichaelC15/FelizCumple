@@ -1,23 +1,9 @@
-<?php
-$respuesta_correcta = "mi amor";
-$mensaje = "";
-
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $respuesta = strtolower(trim($_POST['respuesta']));
-    if ($respuesta === strtolower($respuesta_correcta)) {
-        header("Location: crucigrama.php");
-        exit;
-    } else {
-        $mensaje = "❌ Esa no es la forma más tierna 😢. Inténtalo otra vez, que tú puedes 💖.";
-    }
-}
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>💌 Pregunta para ti</title>
+    <title>🎂 ¡Feliz Cumpleaños, Mi Amochito!</title>
+    <meta http-equiv="refresh" content="16;url=quiz.html">
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -41,41 +27,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             position: relative;
         }
 
-        h2 {
+        h1 {
             font-family: 'Great Vibes', cursive;
-            font-size: 38px;
+            font-size: 48px;
             color: #d6336c;
-            margin-bottom: 20px;
+            margin-bottom: 10px;
         }
 
-        input[type="text"] {
-            padding: 12px;
-            font-size: 16px;
-            border-radius: 10px;
-            border: 2px solid #d6336c;
-            width: 80%;
-            margin-bottom: 20px;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #d6336c;
-            color: white;
-            border: none;
-            font-size: 16px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: background 0.3s;
-        }
-
-        button:hover {
-            background-color: #ad1457;
-        }
-
-        .mensaje {
-            color: #b71c1c;
-            margin-top: 10px;
-            font-weight: bold;
+        p {
+            font-size: 18px;
+            color: #333;
+            margin: 10px 0;
         }
 
         .corazon {
@@ -86,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         @keyframes latido {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.2); }
+            50% { transform: scale(1.3); }
         }
 
         .globo {
@@ -110,7 +72,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             opacity: 0.3;
             z-index: 0;
         }
-
     </style>
 </head>
 <body>
@@ -118,14 +79,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="tarjeta">
         <img src="https://i.postimg.cc/f33cmCbC/images.jpg" class="globo izquierda" alt="globo">
         <img src="https://i.postimg.cc/k2YN2z7D/images-1.jpg" class="globo derecha" alt="globo">
-        <h2>💌 ¿Cómo te gusta que te diga Turri?</h2>
-        <form method="post">
-            <input type="text" name="respuesta" placeholder="Escribe tu respuesta aquí... 💬">
-            <br>
-            <button type="submit">Responder</button>
-        </form>
-        <?php if (!empty($mensaje)) echo "<p class='mensaje'>$mensaje</p>"; ?>
-        <p class="corazon">💕</p>
+        <h1>¡Feliz Cumpleaños, Mi Amochito! 🎉</h1>
+        <p>Hoy celebramos el cumpleaños de la persona más hermosa que ha vivido <strong>6947</strong> días maravillosos.</p>
+        <p>Gracias por existir, por sonreír, por ser tú. 🥰</p>
+        <p class="corazon">❤️</p>
+        <p>Espera un momento... se viene algo especial 🎁</p>
     </div>
 </body>
 </html>

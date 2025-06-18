@@ -1,16 +1,8 @@
-<?php
-$nombre = "Mi Amochito";
-$fecha_nacimiento = new DateTime("2006-06-18");
-$hoy = new DateTime("2025-06-17");
-$dias_vividos = $hoy->diff($fecha_nacimiento)->days;
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>🎂 ¡Feliz Cumpleaños, <?php echo $nombre; ?>!</title>
-    <meta http-equiv="refresh" content="16;url=quiz.php">
+    <title>💌 Pregunta para ti</title>
     <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;600&display=swap" rel="stylesheet">
     <style>
         body {
@@ -34,17 +26,41 @@ $dias_vividos = $hoy->diff($fecha_nacimiento)->days;
             position: relative;
         }
 
-        h1 {
+        h2 {
             font-family: 'Great Vibes', cursive;
-            font-size: 48px;
+            font-size: 38px;
             color: #d6336c;
-            margin-bottom: 10px;
+            margin-bottom: 20px;
         }
 
-        p {
-            font-size: 18px;
-            color: #333;
-            margin: 10px 0;
+        input[type="text"] {
+            padding: 12px;
+            font-size: 16px;
+            border-radius: 10px;
+            border: 2px solid #d6336c;
+            width: 80%;
+            margin-bottom: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #d6336c;
+            color: white;
+            border: none;
+            font-size: 16px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background-color: #ad1457;
+        }
+
+        .mensaje {
+            color: #b71c1c;
+            margin-top: 10px;
+            font-weight: bold;
         }
 
         .corazon {
@@ -55,7 +71,7 @@ $dias_vividos = $hoy->diff($fecha_nacimiento)->days;
 
         @keyframes latido {
             0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.3); }
+            50% { transform: scale(1.2); }
         }
 
         .globo {
@@ -79,7 +95,6 @@ $dias_vividos = $hoy->diff($fecha_nacimiento)->days;
             opacity: 0.3;
             z-index: 0;
         }
-
     </style>
 </head>
 <body>
@@ -87,11 +102,28 @@ $dias_vividos = $hoy->diff($fecha_nacimiento)->days;
     <div class="tarjeta">
         <img src="https://i.postimg.cc/f33cmCbC/images.jpg" class="globo izquierda" alt="globo">
         <img src="https://i.postimg.cc/k2YN2z7D/images-1.jpg" class="globo derecha" alt="globo">
-        <h1>¡Feliz Cumpleaños, <?php echo $nombre; ?>! 🎉</h1>
-        <p>Hoy celebramos el cumpleaños de la persona más hermosa que ha vivido <strong><?php echo $dias_vividos; ?></strong> días maravillosos.</p>
-        <p>Gracias por existir, por sonreír, por ser tú. 🥰</p>
-        <p class="corazon">❤️</p>
-        <p>Espera un momento... se viene algo especial 🎁</p>
+        <h2>💌 ¿Cómo te gusta que te diga Turri?</h2>
+        <form id="formulario">
+            <input type="text" id="respuesta" placeholder="Escribe tu respuesta aquí... 💬">
+            <br>
+            <button type="submit">Responder</button>
+        </form>
+        <p class="mensaje" id="mensaje"></p>
+        <p class="corazon">💕</p>
     </div>
+
+    <script>
+        document.getElementById("formulario").addEventListener("submit", function(e) {
+            e.preventDefault();
+            const respuesta = document.getElementById("respuesta").value.trim().toLowerCase();
+            const mensaje = document.getElementById("mensaje");
+
+            if (respuesta === "mi amor") {
+                window.location.href = "crucigrama.html";
+            } else {
+                mensaje.textContent = "❌ Esa no es la forma más tierna 😢. Inténtalo otra vez, que tú puedes 💖.";
+            }
+        });
+    </script>
 </body>
 </html>
